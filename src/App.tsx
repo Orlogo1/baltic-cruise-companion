@@ -87,8 +87,20 @@ export default function Home() {
     window.setTimeout(updateConnection, 0);
     window.addEventListener("online", updateConnection);
     window.addEventListener("offline", updateConnection);
-    if ("serviceWorker" in navigator) navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(() => undefined);
-    return () => { window.removeEventListener("online", updateConnection); window.removeEventListener("offline", updateConnection); };
+    const refreshForNewVersion = () => {
+      if (!navigator.serviceWorker.controller || window.sessionStorage.getItem("baltic-sw-v13-refreshed")) return;
+      window.sessionStorage.setItem("baltic-sw-v13-refreshed", "true");
+      window.location.reload();
+    };
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.addEventListener("controllerchange", refreshForNewVersion);
+      navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).then((registration) => registration.update()).catch(() => undefined);
+    }
+    return () => {
+      window.removeEventListener("online", updateConnection);
+      window.removeEventListener("offline", updateConnection);
+      if ("serviceWorker" in navigator) navigator.serviceWorker.removeEventListener("controllerchange", refreshForNewVersion);
+    };
   }, []);
 
   useEffect(() => {
