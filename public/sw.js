@@ -1,4 +1,5 @@
-const CACHE = "baltic-companion-github-v3";\nconst BASE = "/baltic-cruise-companion/";
+const CACHE = "baltic-companion-github-v3";
+const BASE = "/baltic-cruise-companion/";
 const SHELL = [BASE, `${BASE}favicon.svg`, `${BASE}site.webmanifest`];
 
 self.addEventListener("install", (event) => {
