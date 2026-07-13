@@ -21,6 +21,44 @@ const dayPortId: Record<string, string> = {
 const portOrder = ["copenhagen", "oslo", "warnemunde", "gdansk", "visby", "riga", "stockholm", "tallinn", "helsinki"];
 const orderedPorts = portOrder.map((id) => ports.find((port) => port.id === id)).filter((port): port is (typeof ports)[number] => Boolean(port));
 
+const flightTracker = [
+  { number: "AA174", date: "Sep 2", route: "RDU → LHR", airline: "American", statusUrl: "https://www.aa.com/travelInformation/flights/status?allFlightNumbers=174&flightNumber=174&sliceNumber=1", mapUrl: "https://www.flightaware.com/live/flight/AAL174" },
+  { number: "SK502", date: "Sep 3", route: "LHR → CPH", airline: "SAS", statusUrl: "https://www.flysas.com/us-en/flight-status", mapUrl: "https://www.flightaware.com/live/flight/SAS502" },
+  { number: "AY1331", date: "Sep 15", route: "HEL → LHR", airline: "Finnair", statusUrl: "https://www.finnair.com/en/flight-information", mapUrl: "https://www.flightaware.com/live/flight/FIN1331" },
+  { number: "AA173", date: "Sep 15", route: "LHR → RDU", airline: "American", statusUrl: "https://www.aa.com/travelInformation/flights/status?allFlightNumbers=173&flightNumber=173&sliceNumber=1", mapUrl: "https://www.flightaware.com/live/flight/AAL173" },
+];
+
+type MapSpot = { label: string; x: number; y: number; kind?: "start" | "return" };
+const offlineMaps: Record<string, { note: string; spots: MapSpot[] }> = {
+  copenhagen: { note: "Adina and the cruise-side harbor sit northeast of the compact sightseeing core.", spots: [
+    { label: "Adina / Østerport", x: 81, y: 20, kind: "start" }, { label: "Rosenborg", x: 52, y: 35 }, { label: "Torvehallerne", x: 36, y: 40 }, { label: "Nyhavn", x: 72, y: 57 }, { label: "Christiansborg", x: 49, y: 65 }, { label: "Tivoli", x: 31, y: 79, kind: "return" },
+  ] },
+  oslo: { note: "The waterfront sights cluster near the ship; Vigeland and Bygdøy are the two longer bus legs.", spots: [
+    { label: "Cruise terminal", x: 74, y: 75, kind: "start" }, { label: "Akershus", x: 62, y: 62 }, { label: "Opera House", x: 86, y: 58 }, { label: "Aker Brygge", x: 45, y: 67 }, { label: "Vigeland", x: 18, y: 30 }, { label: "FRAM Museum", x: 25, y: 82, kind: "return" },
+  ] },
+  warnemunde: { note: "Your excursion handles the long transfer to Schwerin and returns directly to the port.", spots: [
+    { label: "Warnemünde port", x: 14, y: 72, kind: "start" }, { label: "Transfer", x: 33, y: 55 }, { label: "Schwerin Castle", x: 58, y: 30 }, { label: "Old town", x: 75, y: 42 }, { label: "Lunch area", x: 70, y: 65 }, { label: "Port return", x: 25, y: 82, kind: "return" },
+  ] },
+  gdansk: { note: "The ship is in Gdynia; keep the Gdańsk transfer and return buffer at the center of the plan.", spots: [
+    { label: "Gdynia port", x: 16, y: 20, kind: "start" }, { label: "Gdańsk transfer", x: 36, y: 35 }, { label: "Golden Gate", x: 48, y: 64 }, { label: "Long Market", x: 65, y: 60 }, { label: "Crane / river", x: 80, y: 48 }, { label: "Return pickup", x: 74, y: 78, kind: "return" },
+  ] },
+  visby: { note: "Everything important is inside or beside the wall; the harbor is your natural start and finish.", spots: [
+    { label: "Cruise harbor", x: 73, y: 84, kind: "start" }, { label: "Almedalen", x: 59, y: 71 }, { label: "Stora Torget", x: 52, y: 51 }, { label: "Cathedral", x: 54, y: 35 }, { label: "Botanical Garden", x: 42, y: 18 }, { label: "Harbor return", x: 79, y: 72, kind: "return" },
+  ] },
+  riga: { note: "Old Riga lies between the river and canal; Central Market is southeast of the historic core.", spots: [
+    { label: "Cruise pier", x: 15, y: 48, kind: "start" }, { label: "Black Heads", x: 42, y: 58 }, { label: "Riga Cathedral", x: 39, y: 39 }, { label: "Freedom Monument", x: 62, y: 35 }, { label: "Central Market", x: 75, y: 72 }, { label: "Pier return", x: 20, y: 70, kind: "return" },
+  ] },
+  stockholm: { note: "Your transfer drops you in central Stockholm; protect the pickup time before exploring Djurgården.", spots: [
+    { label: "Transfer drop", x: 20, y: 68, kind: "start" }, { label: "City Hall", x: 34, y: 46 }, { label: "Gamla Stan", x: 53, y: 61 }, { label: "Royal Palace", x: 60, y: 49 }, { label: "Vasa Museum", x: 82, y: 39 }, { label: "Transfer pickup", x: 30, y: 79, kind: "return" },
+  ] },
+  tallinn: { note: "Climb to Toompea first, then work downhill through Old Town and back toward the cruise port.", spots: [
+    { label: "Cruise port", x: 84, y: 68, kind: "start" }, { label: "Fat Margaret", x: 67, y: 52 }, { label: "Town Hall", x: 49, y: 57 }, { label: "Toompea", x: 29, y: 31 }, { label: "Viru Gate", x: 62, y: 74 }, { label: "Port return", x: 87, y: 80, kind: "return" },
+  ] },
+  helsinki: { note: "Central Station anchors the city; the harbor ferries leave from the Market Square area.", spots: [
+    { label: "Cruise arrival", x: 85, y: 77, kind: "start" }, { label: "Market Square", x: 69, y: 61 }, { label: "Senate Square", x: 62, y: 43 }, { label: "Central Station", x: 41, y: 48 }, { label: "Design District", x: 47, y: 75 }, { label: "Scandic hotel", x: 34, y: 36, kind: "return" },
+  ] },
+};
+
 type Countdown = { days: number; hours: number; minutes: number; seconds: number; departed: boolean };
 type Weather = { temperature: number; apparent: number; code: number; wind: number; updated: string };
 type ListItem = { id: string; text: string };
@@ -88,8 +126,8 @@ export default function Home() {
     window.addEventListener("online", updateConnection);
     window.addEventListener("offline", updateConnection);
     const refreshForNewVersion = () => {
-      if (!navigator.serviceWorker.controller || window.sessionStorage.getItem("baltic-sw-v13-refreshed")) return;
-      window.sessionStorage.setItem("baltic-sw-v13-refreshed", "true");
+      if (!navigator.serviceWorker.controller || window.sessionStorage.getItem("baltic-sw-v14-refreshed")) return;
+      window.sessionStorage.setItem("baltic-sw-v14-refreshed", "true");
       window.location.reload();
     };
     if ("serviceWorker" in navigator) {
@@ -316,6 +354,14 @@ export default function Home() {
           <article className="travel-card hotel-card"><span className="travel-date">Sep 14–15</span><span className="overline">Helsinki stay</span><h3>Scandic Grand Central</h3><p>Beside Central Station for an easy final night and airport train.</p><span className="confirmed">✓ Confirmed in planner</span></article>
           <article className="travel-card flight-card"><span className="travel-date">Sep 15</span><span className="overline">Homebound</span><h3>HEL <i>→</i> LHR <i>→</i> RDU</h3><div className="flight-pills"><b>AY1331</b><b>AA173</b></div><p>Finnair to London, then American home to Raleigh–Durham.</p></article>
         </div>
+        <div className="flight-dashboard" id="flights">
+          <div className="flight-dashboard-head"><div><span className="overline">Live flight desk</span><strong>Your four flights, one place</strong></div><p>Routes and dates stay available offline. Airline status and live aircraft maps need an internet connection and become most useful within 48 hours of departure.</p></div>
+          <div className="flight-tracker-grid">{flightTracker.map((flight) => <article key={flight.number}>
+            <div><span>{flight.date}</span><b>{flight.airline}</b></div><strong>{flight.number}</strong><h3>{flight.route}</h3>
+            <footer><a href={flight.statusUrl} target="_blank" rel="noreferrer">Airline status ↗</a><a href={flight.mapUrl} target="_blank" rel="noreferrer">Live map ↗</a></footer>
+          </article>)}</div>
+          <small className="live-data-note"><i className={online ? "live" : ""} /> {online ? "Live trackers available" : "Offline · saved flight details only"}</small>
+        </div>
         <div className="rail-plans" aria-label="Airport train plans">
           <article>
             <span className="rail-icon">CPH</span><div><span className="overline">Sep 3 · airport to hotel</span><h3>Direct regional train to Østerport</h3><p>After SK502’s scheduled 1:20 PM arrival, follow Train signs below Terminal 3. Take a northbound Øresund/regional train that lists <b>Østerport</b>, commonly toward Helsingør or Nivå. Ride about 25 minutes, then walk 10–15 minutes to Adina at Amerika Plads 7.</p><small>No fixed train number · services run frequently · buy the ticket before boarding</small></div>
@@ -393,6 +439,14 @@ export default function Home() {
             </div>
 
             <div className="port-details">
+              <div className="detail-card offline-map-card">
+                <div className="offline-map-head"><div><span className="overline">Saved offline · orientation map</span><strong>{activePort.city} pocket map</strong></div><span className="offline-map-badge">Works offline</span></div>
+                <div className="offline-map" role="img" aria-label={`Offline orientation map for ${activePort.city}`}>
+                  <svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path className="map-water" d="M0,5 C18,16 12,38 27,48 C41,58 32,82 48,100 L0,100 Z" /><path className="map-route" d={offlineMaps[activePort.id].spots.map((spot, index) => `${index === 0 ? "M" : "L"}${spot.x},${spot.y}`).join(" ")} /></svg>
+                  {offlineMaps[activePort.id].spots.map((spot, index) => <div key={spot.label} className={`map-spot ${spot.kind ?? ""}`} style={{ left: `${spot.x}%`, top: `${spot.y}%` }}><i>{spot.kind === "start" ? "S" : spot.kind === "return" ? "R" : index}</i><span>{spot.label}</span></div>)}
+                </div>
+                <p>{offlineMaps[activePort.id].note}</p><small>Orientation only—not turn-by-turn navigation. Use the live OpenStreetMap button above for street detail.</small>
+              </div>
               {activePort.hopOnOff && <div className="detail-card bus-pass-card"><div><span className="overline">Booked · City Sightseeing</span><strong>Hop-On Hop-Off pass</strong></div><p>{activePort.hopOnOff.note}</p><a href={activePort.hopOnOff.url} target="_blank" rel="noreferrer">Current route & stops ↗</a></div>}
               <div className="detail-card weather-card" aria-live="polite">
                 <div><span className="overline">Live weather · {activePort.city}</span><strong>{weatherStatus === "ready" && weather ? `${weather.temperature}°F` : weatherStatus === "error" ? "Unavailable" : "Loading…"}</strong></div>
