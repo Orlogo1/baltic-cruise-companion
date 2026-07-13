@@ -52,7 +52,7 @@ export default function Home() {
   const [newTodoItems, setNewTodoItems] = useState<Record<string, string>>({});
   const [phraseCountry, setPhraseCountry] = useState("Denmark");
   const [playing, setPlaying] = useState("");
-  const [countdown, setCountdown] = useState<Countdown>(() => getCountdown());
+  const [countdown, setCountdown] = useState<Countdown>({ days: 0, hours: 0, minutes: 0, seconds: 0, departed: false });
   const [weather, setWeather] = useState<Weather | null>(null);
   const [weatherStatus, setWeatherStatus] = useState<"loading" | "ready" | "error">("loading");
   const [activePhoto, setActivePhoto] = useState(0);
@@ -109,6 +109,7 @@ export default function Home() {
   }, [todoLists, todoChecked, storageReady]);
 
   useEffect(() => {
+    setCountdown(getCountdown());
     const timer = window.setInterval(() => setCountdown(getCountdown()), 1000);
     return () => window.clearInterval(timer);
   }, []);
@@ -228,7 +229,7 @@ export default function Home() {
           <span className="brand-mark">B</span><span>Baltic Companion</span>
         </a>
         <nav aria-label="Main navigation">
-          <a href="#essentials">Trip</a><a href="#days">Days</a><a href="#ports">Ports</a><a href="#pack">Pack</a><a href="#todo">To-Do</a><a href="#phrases">Phrases</a>
+          <a href="#essentials">Trip</a><a href="#music">Music</a><a href="#days">Days</a><a href="#ports">Ports</a><a href="#pack">Pack</a><a href="#todo">To-Do</a><a href="#phrases">Phrases</a>
         </nav>
         <span className={`connection-pill ${online ? "online" : "offline"}`}><i />{online ? "Online" : "Offline"}</span>
       </header>
@@ -279,6 +280,23 @@ export default function Home() {
             <a href="https://app.notion.com/p/2b59aa1f16c080e7843ee206da6b1daa" target="_blank" rel="noreferrer">Open Notion planner ↗</a>
           </div>
         </div>
+        <article className="music-card" id="music">
+          <div className="music-art" aria-hidden="true">
+            <div className="music-sun" />
+            <div className="music-title"><span>Baltic</span><strong>After Dark</strong></div>
+            <div className="music-wave">{[10, 18, 28, 14, 34, 23, 40, 19, 31, 12, 25, 16].map((height, index) => <i key={index} style={{ height }} />)}</div>
+          </div>
+          <div className="music-copy">
+            <span className="overline">Your trip soundtrack</span>
+            <h3>Baltic After Dark</h3>
+            <p>Nordic electronica, Baltic club sounds, German techno, and familiar EDM anthems—sequenced for flights, sail-aways, city streets, and nights aboard.</p>
+            <div className="music-tags"><span>Nordic EDM</span><span>Techno</span><span>Sail-away energy</span></div>
+          </div>
+          <div className="music-action">
+            <a href="https://music.youtube.com/playlist?list=PLG45crNlxOPI&amp;si=-B7WQtj9Ikv56h79" target="_blank" rel="noreferrer" aria-label="Open Baltic After Dark playlist in YouTube Music"><b><i /> YouTube Music</b><span>Open the playlist&nbsp; ↗</span></a>
+            <small><i className={online ? "live" : ""} /> {online ? "Ready to stream" : "Connect to stream"}</small>
+          </div>
+        </article>
         <div className="travel-grid">
           <article className="travel-card flight-card"><span className="travel-date">Sep 2–3</span><span className="overline">Outbound</span><h3>RDU <i>→</i> LHR <i>→</i> CPH</h3><div className="flight-pills"><b>AA174</b><b>SK502</b></div><p>Overnight to London, then onward to Copenhagen.</p></article>
           <article className="travel-card hotel-card"><span className="travel-date">Sep 3–5</span><span className="overline">Copenhagen stay</span><h3>Adina Apartment Hotel</h3><p>Your pre-cruise base near the harbor and cruise-port side of town.</p><span className="confirmed">✓ Confirmed in planner</span></article>
