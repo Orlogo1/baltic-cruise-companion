@@ -150,6 +150,21 @@ section { scroll-margin-top: 72px; }
 .cruise-card p { color: #b9d5d9; }
 .confirmed { margin-top: auto; padding-top: 14px; color: #5d8d70; font-size: 9px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
 .cruise-card .confirmed { color: #b9e0d0; }
+.flight-dashboard { margin-top: 16px; padding: 22px; border: 1px solid rgba(18,40,44,.12); border-radius: 20px; background: var(--ink); color: white; box-shadow: 0 12px 30px rgba(18,40,44,.08); }
+.flight-dashboard-head { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 17px; }
+.flight-dashboard-head strong { display: block; margin-top: 6px; font-family: Georgia, serif; font-size: 22px; font-weight: 400; }
+.flight-dashboard-head p { max-width: 520px; margin: 0; color: #9db0b3; font-size: 10px; line-height: 1.55; }
+.flight-tracker-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.flight-tracker-grid article { min-height: 165px; padding: 17px; display: flex; flex-direction: column; border: 1px solid rgba(255,255,255,.12); border-radius: 14px; background: rgba(255,255,255,.055); }
+.flight-tracker-grid article > div { display: flex; justify-content: space-between; gap: 10px; color: #91b8bd; font-size: 8px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+.flight-tracker-grid article > strong { margin-top: 21px; color: #a7d5dc; font-size: 19px; letter-spacing: .05em; }
+.flight-tracker-grid h3 { margin: 5px 0 16px; font-family: Georgia, serif; font-size: 20px; font-weight: 400; }
+.flight-tracker-grid footer { margin-top: auto; display: flex; gap: 7px; }
+.flight-tracker-grid footer a { flex: 1; padding: 8px 6px; border-radius: 8px; background: rgba(255,255,255,.08); color: #b8dfe4; text-align: center; font-size: 8px; font-weight: 800; }
+.flight-tracker-grid footer a:hover { background: var(--blue); color: white; }
+.live-data-note { margin-top: 13px; display: flex; justify-content: flex-end; align-items: center; gap: 6px; color: #8ca1a4; font-size: 8px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
+.live-data-note i { width: 6px; height: 6px; border-radius: 50%; background: var(--coral); }
+.live-data-note i.live { background: #66a674; }
 .locked-plans { margin-top: 16px; padding: 20px 22px; display: grid; grid-template-columns: 190px 1fr; gap: 22px; align-items: center; border: 1px solid rgba(18,40,44,.12); border-radius: 18px; background: rgba(255,253,248,.76); }
 .locked-plans > div strong { display: block; margin-top: 6px; font-family: Georgia, serif; font-size: 19px; font-weight: 400; }
 .locked-plans ul { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; list-style: none; }
@@ -223,6 +238,22 @@ section { scroll-margin-top: 72px; }
 .weather-reading b { font-family: Georgia, serif; font-size: 17px; font-weight: 400; }
 .weather-reading span, .weather-card p { color: var(--muted); font-size: 10px; }
 .weather-reading small { color: #829396; font-size: 8px; }
+.offline-map-card { padding: 16px !important; }
+.offline-map-head { margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.offline-map-head strong { display: block; margin-top: 5px; font-family: Georgia, serif; font-size: 19px; font-weight: 400; }
+.offline-map-badge { padding: 6px 8px; border-radius: 999px; background: #e8f2e9; color: #568061; font-size: 7px; font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+.offline-map { position: relative; height: 220px; overflow: hidden; border: 1px solid #d8ded8; border-radius: 13px; background: #f4efdf; }
+.offline-map::before { content: ""; position: absolute; inset: 0; opacity: .42; background-image: linear-gradient(rgba(18,40,44,.13) 1px, transparent 1px), linear-gradient(90deg, rgba(18,40,44,.13) 1px, transparent 1px); background-size: 34px 34px; }
+.offline-map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.map-water { fill: #b9dbe0; opacity: .8; }
+.map-route { fill: none; stroke: var(--coral); stroke-width: 1.5; stroke-dasharray: 3 2; vector-effect: non-scaling-stroke; }
+.map-spot { position: absolute; z-index: 2; transform: translate(-50%, -50%); display: grid; justify-items: center; }
+.map-spot i { width: 23px; height: 23px; display: grid; place-items: center; border: 2px solid white; border-radius: 50% 50% 50% 7px; background: var(--blue); color: white; box-shadow: 0 3px 8px rgba(18,40,44,.2); font-style: normal; font-size: 8px; font-weight: 900; }
+.map-spot.start i { background: #5d8d70; }
+.map-spot.return i { background: var(--coral); }
+.map-spot span { max-width: 88px; margin-top: 4px; padding: 3px 5px; border-radius: 5px; background: rgba(255,253,248,.92); color: var(--ink); text-align: center; font-size: 7px; font-weight: 900; line-height: 1.1; }
+.offline-map-card > p { margin: 12px 0 4px !important; color: var(--muted); font-size: 9px !important; line-height: 1.5 !important; }
+.offline-map-card > small { color: #839396; font-size: 7px; line-height: 1.4; }
 .bus-pass-card { display: grid; grid-template-columns: auto 1fr; gap: 13px 18px; align-items: center; border-left: 3px solid var(--coral); }
 .bus-pass-card strong { display: block; margin-top: 6px; font-family: Georgia, serif; font-size: 18px; font-weight: 400; }
 .bus-pass-card p { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.55; }
@@ -355,6 +386,12 @@ section { scroll-margin-top: 72px; }
   .music-tags { display: none; }
   .music-action { grid-column: 1 / -1; }
   .music-action > a { min-height: 58px; }
+  .flight-dashboard { padding: 16px; }
+  .flight-dashboard-head { align-items: start; flex-direction: column; gap: 8px; }
+  .flight-tracker-grid { grid-template-columns: 1fr 1fr; }
+  .flight-tracker-grid article { min-height: 155px; padding: 14px; }
+  .flight-tracker-grid footer { align-items: stretch; flex-direction: column; }
+  .offline-map { height: 245px; }
   .ports-section { padding-top: 68px; padding-bottom: 68px; }
   .day-rail { grid-auto-columns: 82%; }
   .day-card { min-height: 286px; }
