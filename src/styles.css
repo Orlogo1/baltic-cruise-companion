@@ -294,7 +294,7 @@ section { scroll-margin-top: 72px; }
 .add-row input:focus { outline: 2px solid rgba(11,104,119,.2); border-color: var(--blue); }
 .add-row button { border: 0; border-radius: 8px; background: var(--blue); color: white; font-size: 18px; cursor: pointer; }
 .add-row button:hover { background: var(--coral); }
-.packing-card input { position: absolute; opacity: 0; pointer-events: none; }
+.packing-card input[type="checkbox"] { position: absolute; opacity: 0; pointer-events: none; }
 .checkmark { width: 17px; height: 17px; border: 1px solid #9eb1b4; border-radius: 5px; display: grid; place-items: center; flex: 0 0 auto; color: transparent; font-size: 10px; text-decoration: none; }
 .packing-card input:focus-visible + .checkmark { outline: 2px solid var(--blue); outline-offset: 2px; }
 .packing-card label.packed .checkmark { background: var(--blue); border-color: var(--blue); color: white; }
