@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { packing, phrases, ports, tripDays, type Phrase } from "./trip-data";
 
 const destinationPhotos = [
+  { city: "London · Richmond", caption: "Ted Lasso country around Richmond Green", credit: "VisitRichmond", image: "https://eu-assets.simpleview-europe.com/richmond2018/imageresizer/?image=%2Fdmsimgs%2FTed_Lasso_Store_exterior_608872208.jpg&action=ProductDetailPro", source: "https://www.visitrichmond.co.uk/shopping/ted-lasso-store-p2348011" },
   { city: "Copenhagen", caption: "Nyhavn’s colorful harbor", credit: "Mahendra", image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Nyhavn-2023.jpg?width=1600", source: "https://commons.wikimedia.org/wiki/File:Nyhavn-2023.jpg" },
   { city: "Oslo", caption: "The Opera House on the fjord", credit: "Helge Høifødt", image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Oslo_Opera_House_seen_from_Langkaia.JPG?width=1600", source: "https://commons.wikimedia.org/wiki/File:Oslo_Opera_House_seen_from_Langkaia.JPG" },
   { city: "Schwerin", caption: "A castle rising from the lake", credit: "Harald Hoyer", image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Schwerin_Castle_Aerial_View.jpg?width=1600", source: "https://commons.wikimedia.org/wiki/File:Schwerin_Castle_Aerial_View.jpg" },
@@ -14,15 +15,15 @@ const destinationPhotos = [
 ];
 
 const dayPortId: Record<string, string> = {
-  Copenhagen: "copenhagen", Oslo: "oslo", Warnemünde: "warnemunde", Visby: "visby",
+  "London · Richmond": "london", Copenhagen: "copenhagen", Oslo: "oslo", Warnemünde: "warnemunde", Visby: "visby",
   Riga: "riga", Tallinn: "tallinn", Stockholm: "stockholm", Gdańsk: "gdansk", Helsinki: "helsinki",
 };
 
-const portOrder = ["copenhagen", "oslo", "warnemunde", "gdansk", "visby", "riga", "stockholm", "tallinn", "helsinki"];
+const portOrder = ["london", "copenhagen", "oslo", "warnemunde", "gdansk", "visby", "riga", "stockholm", "tallinn", "helsinki"];
 const orderedPorts = portOrder.map((id) => ports.find((port) => port.id === id)).filter((port): port is (typeof ports)[number] => Boolean(port));
 
 const flightTracker = [
-  { number: "AA174", date: "Sep 2", route: "RDU → LHR", airline: "American", statusUrl: "https://www.aa.com/travelInformation/flights/status?allFlightNumbers=174&flightNumber=174&sliceNumber=1", mapUrl: "https://www.flightaware.com/live/flight/AAL174" },
+  { number: "AA174", date: "Sep 1", route: "RDU → LHR", airline: "American", statusUrl: "https://www.aa.com/travelInformation/flights/status?allFlightNumbers=174&flightNumber=174&sliceNumber=1", mapUrl: "https://www.flightaware.com/live/flight/AAL174" },
   { number: "SK502", date: "Sep 3", route: "LHR → CPH", airline: "SAS", statusUrl: "https://www.flysas.com/us-en/flight-status", mapUrl: "https://www.flightaware.com/live/flight/SAS502" },
   { number: "AY1331", date: "Sep 15", route: "HEL → LHR", airline: "Finnair", statusUrl: "https://www.finnair.com/en/flight-information", mapUrl: "https://www.flightaware.com/live/flight/FIN1331" },
   { number: "AA173", date: "Sep 15", route: "LHR → RDU", airline: "American", statusUrl: "https://www.aa.com/travelInformation/flights/status?allFlightNumbers=173&flightNumber=173&sliceNumber=1", mapUrl: "https://www.flightaware.com/live/flight/AAL173" },
@@ -30,6 +31,9 @@ const flightTracker = [
 
 type MapSpot = { label: string; x: number; y: number; kind?: "start" | "return" };
 const offlineMaps: Record<string, { note: string; spots: MapSpot[] }> = {
+  london: { note: "Richmond’s Ted Lasso locations cluster tightly around the Green; the riverside is a short downhill walk.", spots: [
+    { label: "Richmond station", x: 82, y: 75, kind: "start" }, { label: "Ted Lasso Store", x: 57, y: 49 }, { label: "Paved Court", x: 53, y: 42 }, { label: "Prince’s Head", x: 44, y: 34 }, { label: "Richmond Green", x: 31, y: 45 }, { label: "Riverside", x: 22, y: 80, kind: "return" },
+  ] },
   copenhagen: { note: "Adina and the cruise-side harbor sit northeast of the compact sightseeing core.", spots: [
     { label: "Adina / Østerport", x: 81, y: 20, kind: "start" }, { label: "Rosenborg", x: 52, y: 35 }, { label: "Torvehallerne", x: 36, y: 40 }, { label: "Nyhavn", x: 72, y: 57 }, { label: "Christiansborg", x: 49, y: 65 }, { label: "Tivoli", x: 31, y: 79, kind: "return" },
   ] },
@@ -72,7 +76,7 @@ const initialTodos: EditableLists = {
   "Final 48 hours": ["Check flight status", "Check Copenhagen weather", "Charge power banks", "Add luggage tags"].map((text) => ({ id: `final:${text}`, text })),
 };
 
-const departureTime = new Date("2026-09-02T00:00:00-04:00").getTime();
+const departureTime = new Date("2026-09-01T00:00:00-04:00").getTime();
 const weatherLabels: Record<number, string> = { 0: "Clear", 1: "Mostly clear", 2: "Partly cloudy", 3: "Overcast", 45: "Foggy", 48: "Icy fog", 51: "Light drizzle", 53: "Drizzle", 55: "Heavy drizzle", 61: "Light rain", 63: "Rain", 65: "Heavy rain", 71: "Light snow", 73: "Snow", 75: "Heavy snow", 80: "Rain showers", 81: "Rain showers", 82: "Heavy showers", 95: "Thunderstorms" };
 
 function getCountdown(): Countdown {
@@ -132,7 +136,7 @@ export default function Home() {
     };
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.addEventListener("controllerchange", refreshForNewVersion);
-      navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).then((registration) => registration.update()).catch(() => undefined);
+      navigator.serviceWorker.register("/sw.js").then((registration) => registration.update()).catch(() => undefined);
     }
     return () => {
       window.removeEventListener("online", updateConnection);
@@ -260,7 +264,7 @@ export default function Home() {
       const worker = registration.active;
       if (!worker) throw new Error("Offline worker unavailable");
       const resourceUrls = performance.getEntriesByType("resource").map((entry) => entry.name).filter((url) => url.startsWith(window.location.origin));
-      const urls = Array.from(new Set([new URL(import.meta.env.BASE_URL, window.location.origin).href, ...resourceUrls, ...destinationPhotos.map((photo) => photo.image)]));
+      const urls = Array.from(new Set([window.location.origin + "/", ...resourceUrls, ...destinationPhotos.map((photo) => photo.image)]));
       await new Promise<void>((resolve, reject) => {
         const channel = new MessageChannel();
         const timer = window.setTimeout(() => reject(new Error("Offline save timed out")), 30000);
@@ -294,10 +298,10 @@ export default function Home() {
             <a className="button button-quiet" href="#ports">Explore the ports <span>↓</span></a>
           </div>
           <div className="trip-facts" aria-label="Trip summary">
-            <div><strong>Sep 2–15</strong><span>2026 dates</span></div><div><strong>9</strong><span>destinations</span></div><div><strong>{countdown.departed ? "Let’s go" : `${countdown.days}d ${countdown.hours}h`}</strong><span>until departure</span></div>
+            <div><strong>Sep 1–15</strong><span>2026 dates</span></div><div><strong>10</strong><span>destinations</span></div><div><strong>{countdown.departed ? "Let’s go" : `${countdown.days}d ${countdown.hours}h`}</strong><span>until departure</span></div>
           </div>
-          <div className="countdown" aria-live="polite" aria-label="Countdown to September 2, 2026">
-            <span className="overline">{countdown.departed ? "The adventure is underway" : "Until we go · Sep 2"}</span>
+          <div className="countdown" aria-live="polite" aria-label="Countdown to September 1, 2026">
+            <span className="overline">{countdown.departed ? "The adventure is underway" : "Until we go · Sep 1"}</span>
             <div>{[["Days", countdown.days], ["Hours", countdown.hours], ["Min", countdown.minutes], ["Sec", countdown.seconds]].map(([label, value]) => <b key={label}><strong>{String(value).padStart(2, "0")}</strong><small>{label}</small></b>)}</div>
           </div>
         </div>
@@ -327,7 +331,6 @@ export default function Home() {
           <div><span className="overline">Pocket mode</span><h3>{offlineSave === "ready" ? "Trip saved on this device" : "Keep the guide available without service"}</h3><p>Save the itinerary, port plans, packing list, phrases, currency notes, and destination photos. Live weather, maps, and external restaurant links still need a connection.</p></div>
           <div className="offline-actions">
             <button onClick={saveForOffline} disabled={offlineSave === "saving" || !online}>{offlineSave === "saving" ? "Saving…" : offlineSave === "ready" ? "Save again" : offlineSave === "error" ? "Try again online" : "Save for offline"}</button>
-            <a href="https://app.notion.com/p/2b59aa1f16c080e7843ee206da6b1daa" target="_blank" rel="noreferrer">Open Notion planner ↗</a>
           </div>
         </div>
         <article className="music-card" id="music">
@@ -348,7 +351,8 @@ export default function Home() {
           </div>
         </article>
         <div className="travel-grid">
-          <article className="travel-card flight-card"><span className="travel-date">Sep 2–3</span><span className="overline">Outbound</span><h3>RDU <i>→</i> LHR <i>→</i> CPH</h3><div className="flight-pills"><b>AA174</b><b>SK502</b></div><p>Overnight to London, then onward to Copenhagen.</p></article>
+          <article className="travel-card flight-card"><span className="travel-date">Sep 1–3</span><span className="overline">Outbound</span><h3>RDU <i>→</i> LHR <i>→</i> CPH</h3><div className="flight-pills"><b>AA174</b><b>SK502</b></div><p>AA174 overnight one day early, a full Richmond day, then onward to Copenhagen.</p></article>
+          <article className="travel-card hotel-card"><span className="travel-date">Sep 2–3</span><span className="overline">London stay · not booked</span><h3>Sofitel LHR or Crowne Plaza LHR</h3><p>One Heathrow night. The Richmond transfer guidance remains flexible until the hotel is selected.</p><span className="confirmed">Decision pending</span></article>
           <article className="travel-card hotel-card"><span className="travel-date">Sep 3–5</span><span className="overline">Copenhagen stay</span><h3>Adina Apartment Hotel</h3><p>Your pre-cruise base near the harbor and cruise-port side of town.</p><span className="confirmed">✓ Confirmed in planner</span></article>
           <article className="travel-card cruise-card"><span className="travel-date">Sep 5–14</span><span className="overline">Baltic cruise</span><h3>Copenhagen <i>→</i> Helsinki</h3><p>Embark September 5; nine nights with one restorative sea day.</p><span className="confirmed">9 nights</span></article>
           <article className="travel-card hotel-card"><span className="travel-date">Sep 14–15</span><span className="overline">Helsinki stay</span><h3>Scandic Grand Central</h3><p>Beside Central Station for an easy final night and airport train.</p><span className="confirmed">✓ Confirmed in planner</span></article>
@@ -363,6 +367,9 @@ export default function Home() {
           <small className="live-data-note"><i className={online ? "live" : ""} /> {online ? "Live trackers available" : "Offline · saved flight details only"}</small>
         </div>
         <div className="rail-plans" aria-label="Airport train plans">
+          <article>
+            <span className="rail-icon">LHR</span><div><span className="overline">Sep 2–3 · Heathrow base</span><h3>Richmond outing · hotel flexible</h3><p>Drop bags first, then use live TfL directions to <b>Richmond station</b>. From there, Paved Court, the Ted Lasso Store, The Prince’s Head, Richmond Green, and the riverside are all walkable. If you choose the <b>Sofitel</b>, start from Terminal 5; if you choose the <b>Crowne Plaza</b>, start from its hotel shuttle or nearest terminal connection.</p><small>Contactless payment works on TfL · taxi/rideshare is simplest with jet lag · confirm the hotel’s terminal and shuttle before travel</small></div>
+          </article>
           <article>
             <span className="rail-icon">CPH</span><div><span className="overline">Sep 3 · airport to hotel</span><h3>Direct regional train to Østerport</h3><p>After SK502’s scheduled 1:20 PM arrival, follow Train signs below Terminal 3. Take a northbound Øresund/regional train that lists <b>Østerport</b>, commonly toward Helsingør or Nivå. Ride about 25 minutes, then walk 10–15 minutes to Adina at Amerika Plads 7.</p><small>No fixed train number · services run frequently · buy the ticket before boarding</small></div>
           </article>
