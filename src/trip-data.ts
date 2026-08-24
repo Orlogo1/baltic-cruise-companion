@@ -25,6 +25,30 @@ export type Port = {
 
 export const ports: Port[] = [
   {
+    id: "london", city: "London · Richmond", country: "United Kingdom", flag: "🇬🇧", code: "LHR", latitude: 51.4613, longitude: -0.3037, currency: "Pound sterling", currencyCode: "GBP",
+    kicker: "A relaxed Ted Lasso day around Richmond Green before the flight to Copenhagen.",
+    map: "https://www.openstreetmap.org/?mlat=51.4613&mlon=-0.3037#map=16/51.4613/-0.3037",
+    mapLabel: "Richmond Green and Paved Court",
+    timing: "September 2–3 · one Heathrow night",
+    transit: "Drop bags at the Heathrow hotel first. For Richmond, use TfL from Heathrow or a taxi/rideshare if jet lag makes simplicity worth the cost. The final route depends on whether you choose the Sofitel at Terminal 5 or the Crowne Plaza; check live TfL directions before leaving.",
+    highlights: ["Ted Lasso Store", "The Prince’s Head pub", "Paved Court", "Richmond Green", "Richmond riverside", "Ted’s doorway area"],
+    eat: [
+      { name: "The Prince’s Head", why: "The real Richmond pub used as the exterior of the Crown & Anchor in Ted Lasso.", url: "https://www.greeneking.co.uk/pubs/greater-london/princes-head", tag: "Ted Lasso" },
+      { name: "Richmond riverside", why: "Keep a second stop flexible for coffee, dessert, or an early dinner by the Thames.", url: "https://www.visitrichmond.co.uk/explore/richmond/richmond-riverside", tag: "Easy wander" },
+    ],
+    taste: ["Proper pub lunch", "Local ale or cider", "Tea and something sweet"],
+    buy: ["AFC Richmond jersey", "Believe souvenir", "Ted Lasso shop exclusive"],
+    timeline: [
+      { time: "Morning", title: "Land at Heathrow & drop bags", note: "Clear immigration, collect luggage, and leave the bags at your chosen airport hotel. Do not count on the room being ready yet." },
+      { time: "10:30", title: "Travel to Richmond", note: "Use live TfL directions from the selected hotel. A taxi or rideshare is the easiest jet-lag option; public transport is the value option." },
+      { time: "11:30", title: "Ted Lasso Store & Paved Court", note: "Start at 4 Paved Court for official merchandise, then see the lane and doorway area used throughout the show." },
+      { time: "12:30", title: "Lunch at The Prince’s Head", note: "The pub at 28 The Green supplied the Crown & Anchor exterior. Reserve if available and confirm current opening hours." },
+      { time: "14:00", title: "Richmond Green & riverside", note: "Walk the Green, then continue to the Thames for an easy, low-pressure afternoon." },
+      { time: "16:30", title: "Return to Heathrow hotel", note: "Head back before rush hour fully builds, check in, reorganize luggage, and have an early night." },
+      { time: "Next morning", title: "SK502 to Copenhagen", note: "Confirm the departure terminal and leave the hotel in time to be at airline check-in/security about two hours before departure." },
+    ],
+  },
+  {
     id: "copenhagen", city: "Copenhagen", country: "Denmark", flag: "🇩🇰", code: "CPH", latitude: 55.6761, longitude: 12.5683, currency: "Danish krone", currencyCode: "DKK", hopOnOff: { note: "City Sightseeing booked for every Copenhagen day. Use the Classic route for Nyhavn, Rosenborg, Christiansborg and Tivoli; use the Home of Carlsberg route for Carlsberg.", url: "https://city-sightseeing.com/en-us/16/copenhagen/25/hop-on-hop-off-copenhagen" },
     kicker: "Three easy pre-cruise days of canals, castles, beer history, and good walking.",
     map: "https://www.openstreetmap.org/?mlat=55.6761&mlon=12.5683#map=13/55.6761/12.5683",
@@ -239,7 +263,8 @@ export const ports: Port[] = [
 ];
 
 export const tripDays = [
-  { stage: "Wed · Sep 2", city: "Travel", title: "Fly RDU → London", detail: "AA174 overnight; keep the Copenhagen essentials in the carry-on." },
+  { stage: "Tue · Sep 1", city: "Travel", title: "Fly RDU → London", detail: "AA174 overnight one day earlier; keep the first London day’s essentials in the carry-on." },
+  { stage: "Wed · Sep 2", city: "London · Richmond", title: "Ted Lasso day in Richmond", detail: "Drop bags at the Heathrow hotel, visit the Ted Lasso Store and Paved Court, then have lunch at The Prince’s Head." },
   { stage: "Thu · Sep 3", city: "Copenhagen", title: "Arrive, check in, settle down", detail: "SK502 to Copenhagen; Adina check-in and a gentle first evening." },
   { stage: "Fri · Sep 4", city: "Copenhagen", title: "Castles, market, canal & Tivoli", detail: "Your full city day: Rosenborg, Torvehallerne, Nyhavn, and evening lights." },
   { stage: "Sat · Sep 5", city: "Copenhagen", title: "Carlsberg, embark & French dinner", detail: "Ship departs at 5:00 PM; confirmed French dinner aboard at 6:45 PM." },
