@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { packing, phrases, ports, tripDays, type Phrase } from "./trip-data";
 
 const destinationPhotos = [
-  { city: "London · Richmond", caption: "Ted Lasso country around Richmond Green", credit: "VisitRichmond", image: "https://eu-assets.simpleview-europe.com/richmond2018/imageresizer/?image=%2Fdmsimgs%2FTed_Lasso_Store_exterior_608872208.jpg&action=ProductDetailPro", source: "https://www.visitrichmond.co.uk/shopping/ted-lasso-store-p2348011" },
+  { city: "London · Richmond", caption: "Ted Lasso country around Richmond Green", credit: "Wikimedia Commons contributor", image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Richmond_Green,_London_(2).jpg?width=1600", source: "https://commons.wikimedia.org/wiki/File:Richmond_Green,_London_(2).jpg" },
   { city: "Copenhagen", caption: "Nyhavn’s colorful harbor", credit: "Mahendra", image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Nyhavn-2023.jpg?width=1600", source: "https://commons.wikimedia.org/wiki/File:Nyhavn-2023.jpg" },
   { city: "Oslo", caption: "The Opera House on the fjord", credit: "Helge Høifødt", image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Oslo_Opera_House_seen_from_Langkaia.JPG?width=1600", source: "https://commons.wikimedia.org/wiki/File:Oslo_Opera_House_seen_from_Langkaia.JPG" },
   { city: "Schwerin", caption: "A castle rising from the lake", credit: "Harald Hoyer", image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Schwerin_Castle_Aerial_View.jpg?width=1600", source: "https://commons.wikimedia.org/wiki/File:Schwerin_Castle_Aerial_View.jpg" },
