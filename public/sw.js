@@ -1,4 +1,4 @@
-const CACHE = "baltic-companion-github-v6-richmond-photo";
+const CACHE = "baltic-companion-github-v7-sofitel-lounge";
 const BASE = "/baltic-cruise-companion/";
 const SHELL = [BASE, `${BASE}favicon.svg`, `${BASE}site.webmanifest`];
 
