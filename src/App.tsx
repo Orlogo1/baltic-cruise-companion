@@ -130,8 +130,8 @@ export default function Home() {
     window.addEventListener("online", updateConnection);
     window.addEventListener("offline", updateConnection);
     const refreshForNewVersion = () => {
-      if (!navigator.serviceWorker.controller || window.sessionStorage.getItem("baltic-sw-v14-refreshed")) return;
-      window.sessionStorage.setItem("baltic-sw-v14-refreshed", "true");
+      if (!navigator.serviceWorker.controller || window.sessionStorage.getItem("baltic-sw-v17-refreshed")) return;
+      window.sessionStorage.setItem("baltic-sw-v17-refreshed", "true");
       window.location.reload();
     };
     if ("serviceWorker" in navigator) {
@@ -352,7 +352,7 @@ export default function Home() {
         </article>
         <div className="travel-grid">
           <article className="travel-card flight-card"><span className="travel-date">Sep 1–3</span><span className="overline">Outbound</span><h3>RDU <i>→</i> LHR <i>→</i> CPH</h3><div className="flight-pills"><b>AA174</b><b>SK502</b></div><p>AA174 overnight one day early, a full Richmond day, then onward to Copenhagen.</p></article>
-          <article className="travel-card hotel-card"><span className="travel-date">Sep 2–3</span><span className="overline">London stay · not booked</span><h3>Sofitel LHR or Crowne Plaza LHR</h3><p>One Heathrow night. The Richmond transfer guidance remains flexible until the hotel is selected.</p><span className="confirmed">Decision pending</span></article>
+          <article className="travel-card hotel-card"><span className="travel-date">Sep 2–3</span><span className="overline">London stay · Terminal 5</span><h3>Sofitel London Heathrow</h3><p>One Heathrow night with lounge access, directly connected to Terminal 5 by a covered walkway.</p><span className="confirmed">✓ Booked · lounge access</span></article>
           <article className="travel-card hotel-card"><span className="travel-date">Sep 3–5</span><span className="overline">Copenhagen stay</span><h3>Adina Apartment Hotel</h3><p>Your pre-cruise base near the harbor and cruise-port side of town.</p><span className="confirmed">✓ Confirmed in planner</span></article>
           <article className="travel-card cruise-card"><span className="travel-date">Sep 5–14</span><span className="overline">Baltic cruise</span><h3>Copenhagen <i>→</i> Helsinki</h3><p>Embark September 5; nine nights with one restorative sea day.</p><span className="confirmed">9 nights</span></article>
           <article className="travel-card hotel-card"><span className="travel-date">Sep 14–15</span><span className="overline">Helsinki stay</span><h3>Scandic Grand Central</h3><p>Beside Central Station for an easy final night and airport train.</p><span className="confirmed">✓ Confirmed in planner</span></article>
@@ -368,7 +368,7 @@ export default function Home() {
         </div>
         <div className="rail-plans" aria-label="Airport train plans">
           <article>
-            <span className="rail-icon">LHR</span><div><span className="overline">Sep 2–3 · Heathrow base</span><h3>Richmond outing · hotel flexible</h3><p>Drop bags first, then use live TfL directions to <b>Richmond station</b>. From there, Paved Court, the Ted Lasso Store, The Prince’s Head, Richmond Green, and the riverside are all walkable. If you choose the <b>Sofitel</b>, start from Terminal 5; if you choose the <b>Crowne Plaza</b>, start from its hotel shuttle or nearest terminal connection.</p><small>Contactless payment works on TfL · taxi/rideshare is simplest with jet lag · confirm the hotel’s terminal and shuttle before travel</small></div>
+            <span className="rail-icon">LHR</span><div><span className="overline">Sep 2–3 · Sofitel Terminal 5</span><h3>Richmond outing · confirmed base</h3><p>Walk from Terminal 5 to the <b>Sofitel London Heathrow</b>, drop the bags, then use live TfL directions to <b>Richmond station</b>. From there, Paved Court, the Ted Lasso Store, The Prince’s Head, Richmond Green, and the riverside are all walkable. Return in time to enjoy the included hotel lounge before an early night.</p><small>Covered walkway from Terminal 5 · contactless payment works on TfL · confirm lounge hours and SK502’s departure terminal at check-in</small></div>
           </article>
           <article>
             <span className="rail-icon">CPH</span><div><span className="overline">Sep 3 · airport to hotel</span><h3>Direct regional train to Østerport</h3><p>After SK502’s scheduled 1:20 PM arrival, follow Train signs below Terminal 3. Take a northbound Øresund/regional train that lists <b>Østerport</b>, commonly toward Helsingør or Nivå. Ride about 25 minutes, then walk 10–15 minutes to Adina at Amerika Plads 7.</p><small>No fixed train number · services run frequently · buy the ticket before boarding</small></div>
