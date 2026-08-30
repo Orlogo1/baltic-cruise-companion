@@ -1,4 +1,4 @@
-const CACHE = "baltic-companion-github-v7-sofitel-lounge";
+const CACHE = "baltic-companion-github-v8-cruise-tracker";
 const BASE = "/baltic-cruise-companion/";
 const SHELL = [BASE, `${BASE}favicon.svg`, `${BASE}site.webmanifest`];
 
