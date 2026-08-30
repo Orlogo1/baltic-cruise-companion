@@ -130,8 +130,8 @@ export default function Home() {
     window.addEventListener("online", updateConnection);
     window.addEventListener("offline", updateConnection);
     const refreshForNewVersion = () => {
-      if (!navigator.serviceWorker.controller || window.sessionStorage.getItem("baltic-sw-v17-refreshed")) return;
-      window.sessionStorage.setItem("baltic-sw-v17-refreshed", "true");
+      if (!navigator.serviceWorker.controller || window.sessionStorage.getItem("baltic-sw-v18-refreshed")) return;
+      window.sessionStorage.setItem("baltic-sw-v18-refreshed", "true");
       window.location.reload();
     };
     if ("serviceWorker" in navigator) {
@@ -355,6 +355,7 @@ export default function Home() {
           <article className="travel-card hotel-card"><span className="travel-date">Sep 2–3</span><span className="overline">London stay · Terminal 5</span><h3>Sofitel London Heathrow</h3><p>One Heathrow night with lounge access, directly connected to Terminal 5 by a covered walkway.</p><span className="confirmed">✓ Booked · lounge access</span></article>
           <article className="travel-card hotel-card"><span className="travel-date">Sep 3–5</span><span className="overline">Copenhagen stay</span><h3>Adina Apartment Hotel</h3><p>Your pre-cruise base near the harbor and cruise-port side of town.</p><span className="confirmed">✓ Confirmed in planner</span></article>
           <article className="travel-card cruise-card"><span className="travel-date">Sep 5–14</span><span className="overline">Baltic cruise</span><h3>Copenhagen <i>→</i> Helsinki</h3><p>Embark September 5; nine nights with one restorative sea day.</p><span className="confirmed">9 nights</span></article>
+          <article className="travel-card cruise-tracker-card"><span className="travel-date">Live map</span><span className="overline">Cruise tracker</span><h3>Where is Norwegian Sun?</h3><p>Open CruiseMapper for the ship’s latest AIS position, route, speed, and current itinerary.</p><a href="https://www.cruisemapper.com/ships/Norwegian-Sun-735" target="_blank" rel="noreferrer" aria-label="Track Norwegian Sun live on CruiseMapper">Track the ship&nbsp; ↗</a><small><i className={online ? "live" : ""} /> {online ? "Live tracker available" : "Connect to view position"}</small></article>
           <article className="travel-card hotel-card"><span className="travel-date">Sep 14–15</span><span className="overline">Helsinki stay</span><h3>Scandic Grand Central</h3><p>Beside Central Station for an easy final night and airport train.</p><span className="confirmed">✓ Confirmed in planner</span></article>
           <article className="travel-card flight-card"><span className="travel-date">Sep 15</span><span className="overline">Homebound</span><h3>HEL <i>→</i> LHR <i>→</i> RDU</h3><div className="flight-pills"><b>AY1331</b><b>AA173</b></div><p>Finnair to London, then American home to Raleigh–Durham.</p></article>
         </div>
