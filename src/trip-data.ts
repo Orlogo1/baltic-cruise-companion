@@ -45,7 +45,7 @@ export const ports: Port[] = [
       { time: "11:30", title: "Römerberg & cathedral", note: "Walk the reconstructed old town, Römer square, cathedral, and Eiserner Steg without overloading the jet-lag day." },
       { time: "14:00", title: "Main river or Main Tower", note: "Choose an easy river walk or a skyline view depending on energy and weather." },
       { time: "17:00", title: "Sachsenhausen dinner", note: "Try green sauce and Apfelwein, then turn in early." },
-      { time: "19:38", title: "Arrive at København H", note: "Continue to the September 2 Copenhagen hotel, which is still to be booked." },
+      { time: "19:38", title: "Arrive at København H", note: "Walk toward City Hall Square and check in at citizenM Copenhagen Rådhuspladsen, H.C. Andersens Boulevard 12." },
     ],
   },
   {
@@ -264,7 +264,7 @@ export const ports: Port[] = [
 
 export const tripDays = [
   { stage: "Tue · Sep 1", city: "Travel", title: "Fly Charlotte → Frankfurt", detail: "AA704 overnight from CLT to FRA; the car stays in Charlotte for the return drive." },
-  { stage: "Wed · Sep 2", city: "Frankfurt", title: "Train Frankfurt → Copenhagen", detail: "ICE 1074 leaves Frankfurt Airport at 09:38; transfer in Hamburg to ECE 394 at 14:52 and arrive at København H at 19:38. Copenhagen hotel needed for tonight." },
+  { stage: "Wed · Sep 2", city: "Frankfurt", title: "Train Frankfurt → Copenhagen", detail: "ICE 1074 leaves Frankfurt Airport at 09:38; transfer in Hamburg to ECE 394 at 14:52 and arrive at København H at 19:38. Stay at citizenM Copenhagen Rådhuspladsen tonight." },
   { stage: "Thu · Sep 3", city: "Copenhagen", title: "Full Copenhagen day", detail: "Enjoy the extra Copenhagen day, then settle into the confirmed Adina Apartment Hotel stay before embarkation." },
   { stage: "Fri · Sep 4", city: "Copenhagen", title: "Castles, market, canal & Tivoli", detail: "Your full city day: Rosenborg, Torvehallerne, Nyhavn, and evening lights." },
   { stage: "Sat · Sep 5", city: "Copenhagen", title: "Carlsberg, embark & French dinner", detail: "Ship departs at 5:00 PM; confirmed French dinner aboard at 6:45 PM." },
