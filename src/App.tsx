@@ -130,8 +130,8 @@ export default function Home() {
     window.addEventListener("online", updateConnection);
     window.addEventListener("offline", updateConnection);
     const refreshForNewVersion = () => {
-      if (!navigator.serviceWorker.controller || window.sessionStorage.getItem("baltic-sw-v23-refreshed")) return;
-      window.sessionStorage.setItem("baltic-sw-v23-refreshed", "true");
+      if (!navigator.serviceWorker.controller || window.sessionStorage.getItem("baltic-sw-v24-refreshed")) return;
+      window.sessionStorage.setItem("baltic-sw-v24-refreshed", "true");
       window.location.reload();
     };
     if ("serviceWorker" in navigator) {
@@ -353,8 +353,8 @@ export default function Home() {
         </article>
         <div className="travel-grid">
           <article className="travel-card flight-card"><span className="travel-date">Sep 1–2</span><span className="overline">Outbound</span><h3>CLT <i>→</i> FRA</h3><div className="flight-pills"><b>AA704</b></div><p>Overnight to Frankfurt, then continue to Copenhagen by train on September 2 or 3.</p></article>
-          <article className="travel-card hotel-card"><span className="travel-date">Sep 2–3</span><span className="overline">Flexible extra day</span><h3>Frankfurt or Copenhagen</h3><p>Stay one night in Frankfurt, or take the long train after arrival and use the extra day in Copenhagen.</p><span className="confirmed">Decision pending</span></article>
-          <article className="travel-card hotel-card"><span className="travel-date">Sep 2/3–5</span><span className="overline">Copenhagen stay</span><h3>Adina Apartment Hotel</h3><p>Your pre-cruise base near the harbor; arrival date depends on the Frankfurt decision.</p><span className="confirmed">✓ Hotel confirmed</span></article>
+          <article className="travel-card hotel-card"><span className="travel-date">Night of Sep 2</span><span className="overline">Copenhagen hotel</span><h3>Hotel still needed</h3><p>Book one Copenhagen night after the 19:38 arrival at København H.</p><span className="pending">Booking needed</span></article>
+          <article className="travel-card hotel-card"><span className="travel-date">Sep 3–5</span><span className="overline">Copenhagen stay</span><h3>Adina Apartment Hotel</h3><p>Your confirmed pre-cruise base near the harbor.</p><span className="confirmed">✓ Hotel confirmed</span></article>
           <article className="travel-card cruise-card"><span className="travel-date">Sep 5–14</span><span className="overline">Baltic cruise</span><h3>Copenhagen <i>→</i> Helsinki</h3><p>Embark September 5; nine nights with one restorative sea day.</p><span className="confirmed">9 nights</span></article>
           <article className="travel-card cruise-tracker-card"><span className="travel-date">Live map</span><span className="overline">Cruise tracker</span><h3>Where is Norwegian Sun?</h3><p>Open CruiseMapper for the ship’s latest AIS position, route, speed, and current itinerary.</p><a href="https://www.cruisemapper.com/ships/Norwegian-Sun-735" target="_blank" rel="noreferrer" aria-label="Track Norwegian Sun live on CruiseMapper">Track the ship&nbsp; ↗</a><small><i className={online ? "live" : ""} /> {online ? "Live tracker available" : "Connect to view position"}</small></article>
           <article className="travel-card hotel-card"><span className="travel-date">Sep 14–15</span><span className="overline">Helsinki stay</span><h3>Scandic Grand Central</h3><p>Beside Central Station for an easy final night and airport train.</p><span className="confirmed">✓ Confirmed in planner</span></article>
@@ -370,10 +370,10 @@ export default function Home() {
         </div>
         <div className="rail-plans" aria-label="Airport train plans">
           <article>
-            <span className="rail-icon">FRA</span><div><span className="overline">Sep 2 or 3 · Frankfurt to Copenhagen</span><h3>Long-distance train to København H</h3><p>Use <b>Frankfurt Flughafen Fernbahnhof</b> for the long-distance journey. Deutsche Bahn currently shows fastest trips around <b>9¼ hours</b> with at least one transfer; reserve seats and choose a connection with sensible transfer margins after you decide which city gets the extra day.</p><small>No direct train · exact services depend on the booked date · recheck the full itinerary in DB Navigator before departure</small></div>
+            <span className="rail-icon">FRA</span><div><span className="overline">Wed · Sep 2 · Frankfurt Airport to Copenhagen</span><h3>ICE 1074 → ECE 394</h3><p>Depart <b>Frankfurt Flughafen Fernbahnhof at 09:38</b> on ICE 1074. Transfer at <b>Hamburg Hbf</b> to ECE 394 departing at <b>14:52</b>, then arrive at <b>København H at 19:38</b>.</p><small>Confirmed itinerary · allow time after AA704 for immigration, baggage, and the long-distance station</small></div>
           </article>
           <article>
-            <span className="rail-icon">CPH</span><div><span className="overline">Sep 2 or 3 · station to hotel</span><h3>København H to Adina</h3><p>After the Germany–Denmark train arrives at <b>København H</b>, take an S-train toward <b>Østerport</b>, then walk about 10–15 minutes to Adina at Amerika Plads 7. A taxi is the low-effort option after the long rail day.</p><small>Arrival day depends on the Frankfurt decision · keep the hotel informed if arriving late</small></div>
+            <span className="rail-icon">CPH</span><div><span className="overline">Sep 2 · 19:38 arrival</span><h3>København H to hotel</h3><p>Your September 2 hotel is still to be booked. Choose a property near Central Station for the easiest arrival, or take a taxi if you book elsewhere after the long rail day.</p><small>Add the hotel address and transfer directions once the reservation is confirmed</small></div>
           </article>
           <article>
             <span className="rail-icon">HEL</span><div><span className="overline">Sep 15 · hotel to airport</span><h3>I or P train · airport target 6:00 AM</h3><p>AY1331 is currently scheduled for <b>8:00 AM</b>. Leave the hotel room around <b>5:00 AM</b>, walk directly into Helsinki Central, and take the first airport-bound <b>I or P train departing by 5:20 AM</b>. The ride is about 30 minutes, putting you at HEL around 5:50 AM—just over two hours early.</p><small>ABC ticket required · use whichever I/P train leaves first · confirm flight and early train times the day before</small></div>
