@@ -130,8 +130,8 @@ export default function Home() {
     window.addEventListener("online", updateConnection);
     window.addEventListener("offline", updateConnection);
     const refreshForNewVersion = () => {
-      if (!navigator.serviceWorker.controller || window.sessionStorage.getItem("baltic-sw-v24-refreshed")) return;
-      window.sessionStorage.setItem("baltic-sw-v24-refreshed", "true");
+      if (!navigator.serviceWorker.controller || window.sessionStorage.getItem("baltic-sw-v25-refreshed")) return;
+      window.sessionStorage.setItem("baltic-sw-v25-refreshed", "true");
       window.location.reload();
     };
     if ("serviceWorker" in navigator) {
@@ -353,7 +353,7 @@ export default function Home() {
         </article>
         <div className="travel-grid">
           <article className="travel-card flight-card"><span className="travel-date">Sep 1–2</span><span className="overline">Outbound</span><h3>CLT <i>→</i> FRA</h3><div className="flight-pills"><b>AA704</b></div><p>Overnight to Frankfurt, then continue to Copenhagen by train on September 2 or 3.</p></article>
-          <article className="travel-card hotel-card"><span className="travel-date">Night of Sep 2</span><span className="overline">Copenhagen hotel</span><h3>Hotel still needed</h3><p>Book one Copenhagen night after the 19:38 arrival at København H.</p><span className="pending">Booking needed</span></article>
+          <article className="travel-card hotel-card"><span className="travel-date">Night of Sep 2</span><span className="overline">Copenhagen hotel</span><h3>citizenM Copenhagen Rådhuspladsen</h3><p>One-night stay at H.C. Andersens Boulevard 12 after the 19:38 arrival at København H.</p><span className="confirmed">✓ Hotel confirmed</span></article>
           <article className="travel-card hotel-card"><span className="travel-date">Sep 3–5</span><span className="overline">Copenhagen stay</span><h3>Adina Apartment Hotel</h3><p>Your confirmed pre-cruise base near the harbor.</p><span className="confirmed">✓ Hotel confirmed</span></article>
           <article className="travel-card cruise-card"><span className="travel-date">Sep 5–14</span><span className="overline">Baltic cruise</span><h3>Copenhagen <i>→</i> Helsinki</h3><p>Embark September 5; nine nights with one restorative sea day.</p><span className="confirmed">9 nights</span></article>
           <article className="travel-card cruise-tracker-card"><span className="travel-date">Live map</span><span className="overline">Cruise tracker</span><h3>Where is Norwegian Sun?</h3><p>Open CruiseMapper for the ship’s latest AIS position, route, speed, and current itinerary.</p><a href="https://www.cruisemapper.com/ships/Norwegian-Sun-735" target="_blank" rel="noreferrer" aria-label="Track Norwegian Sun live on CruiseMapper">Track the ship&nbsp; ↗</a><small><i className={online ? "live" : ""} /> {online ? "Live tracker available" : "Connect to view position"}</small></article>
@@ -373,7 +373,7 @@ export default function Home() {
             <span className="rail-icon">FRA</span><div><span className="overline">Wed · Sep 2 · Frankfurt Airport to Copenhagen</span><h3>ICE 1074 → ECE 394</h3><p>Depart <b>Frankfurt Flughafen Fernbahnhof at 09:38</b> on ICE 1074. Transfer at <b>Hamburg Hbf</b> to ECE 394 departing at <b>14:52</b>, then arrive at <b>København H at 19:38</b>.</p><small>Confirmed itinerary · allow time after AA704 for immigration, baggage, and the long-distance station</small></div>
           </article>
           <article>
-            <span className="rail-icon">CPH</span><div><span className="overline">Sep 2 · 19:38 arrival</span><h3>København H to hotel</h3><p>Your September 2 hotel is still to be booked. Choose a property near Central Station for the easiest arrival, or take a taxi if you book elsewhere after the long rail day.</p><small>Add the hotel address and transfer directions once the reservation is confirmed</small></div>
+            <span className="rail-icon">CPH</span><div><span className="overline">Sep 2 · 19:38 arrival</span><h3>København H to citizenM Rådhuspladsen</h3><p>From Copenhagen Central Station, walk toward City Hall Square to <b>H.C. Andersens Boulevard 12</b>. It is a short central-city walk; a taxi is the low-effort option after the long rail day.</p><small>Confirmed for one night · check in after arriving from Hamburg</small></div>
           </article>
           <article>
             <span className="rail-icon">HEL</span><div><span className="overline">Sep 15 · hotel to airport</span><h3>I or P train · airport target 6:00 AM</h3><p>AY1331 is currently scheduled for <b>8:00 AM</b>. Leave the hotel room around <b>5:00 AM</b>, walk directly into Helsinki Central, and take the first airport-bound <b>I or P train departing by 5:20 AM</b>. The ride is about 30 minutes, putting you at HEL around 5:50 AM—just over two hours early.</p><small>ABC ticket required · use whichever I/P train leaves first · confirm flight and early train times the day before</small></div>
