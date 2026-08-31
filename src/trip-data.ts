@@ -26,11 +26,11 @@ export type Port = {
 export const ports: Port[] = [
   {
     id: "frankfurt", city: "Frankfurt", country: "Germany", flag: "🇩🇪", code: "FRA", latitude: 50.1109, longitude: 8.6821, currency: "Euro", currencyCode: "EUR",
-    kicker: "Your flexible arrival stop: spend September 2 in Frankfurt or continue by train for an extra Copenhagen day.",
+    kicker: "Your arrival connection: AA704 into Frankfurt, then the confirmed September 2 train to Copenhagen.",
     map: "https://www.openstreetmap.org/?mlat=50.1109&mlon=8.6821#map=14/50.1109/8.6821",
     mapLabel: "Römerberg and central Frankfurt",
     timing: "September 2–3 · plan still flexible",
-    transit: "AA704 arrives at FRA on September 2. Trains to København H take roughly 9¼ hours at best and require at least one transfer, so reserve a specific connection once you choose whether to travel that day or after a Frankfurt overnight. Use Frankfurt Flughafen Fernbahnhof for long-distance services and recheck the Deutsche Bahn itinerary before travel.",
+    transit: "After AA704 arrives at FRA on September 2, use Frankfurt Flughafen Fernbahnhof. ICE 1074 departs at 09:38, connects at Hamburg Hbf to ECE 394 at 14:52, and arrives at København H at 19:38.",
     highlights: ["Römerberg", "Frankfurt Cathedral", "Main riverfront", "Kleinmarkthalle", "Eiserner Steg", "Main Tower"],
     eat: [
       { name: "Kleinmarkthalle", why: "An easy central stop for local food, snacks, and a low-pressure arrival-day lunch.", url: "https://www.kleinmarkthalle.de/", tag: "Market" },
@@ -40,12 +40,12 @@ export const ports: Port[] = [
     buy: ["Apple-wine glass", "Frankfurt skyline souvenir", "German sweets"],
     timeline: [
       { time: "Morning", title: "AA704 arrives at Frankfurt", note: "Clear immigration and collect luggage. Do not book a tight train connection after an international arrival." },
-      { time: "Option A", title: "Continue to Copenhagen", note: "Take a reserved long-distance itinerary from Frankfurt Airport to København H. Expect roughly 9¼ hours or more and at least one transfer, arriving in Copenhagen in the evening." },
-      { time: "Option B", title: "Stay in Frankfurt", note: "Store bags or check in, then take the S-Bahn into the center for a relaxed arrival day." },
+      { time: "09:38", title: "ICE 1074 from Frankfurt Airport", note: "Board at Frankfurt Flughafen Fernbahnhof for Hamburg Hbf." },
+      { time: "14:52", title: "ECE 394 from Hamburg", note: "Transfer at Hamburg Hbf and continue north toward Denmark." },
       { time: "11:30", title: "Römerberg & cathedral", note: "Walk the reconstructed old town, Römer square, cathedral, and Eiserner Steg without overloading the jet-lag day." },
       { time: "14:00", title: "Main river or Main Tower", note: "Choose an easy river walk or a skyline view depending on energy and weather." },
       { time: "17:00", title: "Sachsenhausen dinner", note: "Try green sauce and Apfelwein, then turn in early." },
-      { time: "Next day", title: "Train to Copenhagen", note: "If you stayed overnight, use your reserved Frankfurt–København H itinerary and protect every transfer. Exact trains depend on the ticket you select." },
+      { time: "19:38", title: "Arrive at København H", note: "Continue to the September 2 Copenhagen hotel, which is still to be booked." },
     ],
   },
   {
@@ -264,8 +264,8 @@ export const ports: Port[] = [
 
 export const tripDays = [
   { stage: "Tue · Sep 1", city: "Travel", title: "Fly Charlotte → Frankfurt", detail: "AA704 overnight from CLT to FRA; the car stays in Charlotte for the return drive." },
-  { stage: "Wed · Sep 2", city: "Frankfurt", title: "Frankfurt day or train onward", detail: "After AA704, either explore Frankfurt and stay overnight or take the long train to Copenhagen for an extra day there." },
-  { stage: "Thu · Sep 3", city: "Copenhagen", title: "Flexible arrival / full city day", detail: "If you stayed in Frankfurt, travel to København H today; otherwise enjoy the extra Copenhagen day and your all-days sightseeing ticket." },
+  { stage: "Wed · Sep 2", city: "Frankfurt", title: "Train Frankfurt → Copenhagen", detail: "ICE 1074 leaves Frankfurt Airport at 09:38; transfer in Hamburg to ECE 394 at 14:52 and arrive at København H at 19:38. Copenhagen hotel needed for tonight." },
+  { stage: "Thu · Sep 3", city: "Copenhagen", title: "Full Copenhagen day", detail: "Enjoy the extra Copenhagen day, then settle into the confirmed Adina Apartment Hotel stay before embarkation." },
   { stage: "Fri · Sep 4", city: "Copenhagen", title: "Castles, market, canal & Tivoli", detail: "Your full city day: Rosenborg, Torvehallerne, Nyhavn, and evening lights." },
   { stage: "Sat · Sep 5", city: "Copenhagen", title: "Carlsberg, embark & French dinner", detail: "Ship departs at 5:00 PM; confirmed French dinner aboard at 6:45 PM." },
   { stage: "Sun · Sep 6", city: "Oslo", title: "Vigeland to Aker Brygge", detail: "A long 10:00 AM–9:00 PM call with city sights and one museum." },
