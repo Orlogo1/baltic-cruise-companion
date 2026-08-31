@@ -25,27 +25,27 @@ export type Port = {
 
 export const ports: Port[] = [
   {
-    id: "london", city: "London · Richmond", country: "United Kingdom", flag: "🇬🇧", code: "LHR", latitude: 51.4613, longitude: -0.3037, currency: "Pound sterling", currencyCode: "GBP",
-    kicker: "A relaxed Ted Lasso day around Richmond Green before the flight to Copenhagen.",
-    map: "https://www.openstreetmap.org/?mlat=51.4613&mlon=-0.3037#map=16/51.4613/-0.3037",
-    mapLabel: "Richmond Green and Paved Court",
-    timing: "September 2–3 · one Heathrow night",
-    transit: "The Sofitel London Heathrow is directly connected to Terminal 5 by a covered walkway. Drop bags there first, then use live TfL directions to Richmond or take a taxi/rideshare if jet lag makes simplicity worth the cost.",
-    highlights: ["Ted Lasso Store", "The Prince’s Head pub", "Paved Court", "Richmond Green", "Richmond riverside", "Ted’s doorway area"],
+    id: "frankfurt", city: "Frankfurt", country: "Germany", flag: "🇩🇪", code: "FRA", latitude: 50.1109, longitude: 8.6821, currency: "Euro", currencyCode: "EUR",
+    kicker: "Your flexible arrival stop: spend September 2 in Frankfurt or continue by train for an extra Copenhagen day.",
+    map: "https://www.openstreetmap.org/?mlat=50.1109&mlon=8.6821#map=14/50.1109/8.6821",
+    mapLabel: "Römerberg and central Frankfurt",
+    timing: "September 2–3 · plan still flexible",
+    transit: "AA704 arrives at FRA on September 2. Trains to København H take roughly 9¼ hours at best and require at least one transfer, so reserve a specific connection once you choose whether to travel that day or after a Frankfurt overnight. Use Frankfurt Flughafen Fernbahnhof for long-distance services and recheck the Deutsche Bahn itinerary before travel.",
+    highlights: ["Römerberg", "Frankfurt Cathedral", "Main riverfront", "Kleinmarkthalle", "Eiserner Steg", "Main Tower"],
     eat: [
-      { name: "The Prince’s Head", why: "The real Richmond pub used as the exterior of the Crown & Anchor in Ted Lasso.", url: "https://www.greeneking.co.uk/pubs/greater-london/princes-head", tag: "Ted Lasso" },
-      { name: "Richmond riverside", why: "Keep a second stop flexible for coffee, dessert, or an early dinner by the Thames.", url: "https://www.visitrichmond.co.uk/explore/richmond/richmond-riverside", tag: "Easy wander" },
+      { name: "Kleinmarkthalle", why: "An easy central stop for local food, snacks, and a low-pressure arrival-day lunch.", url: "https://www.kleinmarkthalle.de/", tag: "Market" },
+      { name: "Sachsenhausen", why: "Traditional apple-wine taverns and hearty Frankfurt cooking south of the Main.", url: "https://www.visitfrankfurt.travel/en/poi/sachsenhausen", tag: "Traditional" },
     ],
-    taste: ["Proper pub lunch", "Local ale or cider", "Tea and something sweet"],
-    buy: ["AFC Richmond jersey", "Believe souvenir", "Ted Lasso shop exclusive"],
+    taste: ["Frankfurter green sauce", "Apfelwein", "Frankfurter Kranz"],
+    buy: ["Apple-wine glass", "Frankfurt skyline souvenir", "German sweets"],
     timeline: [
-      { time: "Morning", title: "Land at Heathrow & drop bags", note: "Clear immigration, collect luggage, and walk to the Sofitel London Heathrow at Terminal 5. Leave the bags if the room is not ready yet." },
-      { time: "10:30", title: "Travel to Richmond", note: "Use live TfL directions from Terminal 5/Sofitel. A taxi or rideshare is the easiest jet-lag option; public transport is the value option." },
-      { time: "11:30", title: "Ted Lasso Store & Paved Court", note: "Start at 4 Paved Court for official merchandise, then see the lane and doorway area used throughout the show." },
-      { time: "12:30", title: "Lunch at The Prince’s Head", note: "The pub at 28 The Green supplied the Crown & Anchor exterior. Reserve if available and confirm current opening hours." },
-      { time: "14:00", title: "Richmond Green & riverside", note: "Walk the Green, then continue to the Thames for an easy, low-pressure afternoon." },
-      { time: "16:30", title: "Return to the Sofitel", note: "Head back before rush hour fully builds, check in, reorganize luggage, and use the included lounge access for a relaxed evening. Confirm lounge hours and service at check-in." },
-      { time: "Next morning", title: "Lounge breakfast & SK502", note: "Use the lounge for breakfast if its hours fit the flight, then take the appropriate Heathrow transfer if SK502 departs from a terminal other than Terminal 5. Aim to reach airline check-in/security about two hours before departure." },
+      { time: "Morning", title: "AA704 arrives at Frankfurt", note: "Clear immigration and collect luggage. Do not book a tight train connection after an international arrival." },
+      { time: "Option A", title: "Continue to Copenhagen", note: "Take a reserved long-distance itinerary from Frankfurt Airport to København H. Expect roughly 9¼ hours or more and at least one transfer, arriving in Copenhagen in the evening." },
+      { time: "Option B", title: "Stay in Frankfurt", note: "Store bags or check in, then take the S-Bahn into the center for a relaxed arrival day." },
+      { time: "11:30", title: "Römerberg & cathedral", note: "Walk the reconstructed old town, Römer square, cathedral, and Eiserner Steg without overloading the jet-lag day." },
+      { time: "14:00", title: "Main river or Main Tower", note: "Choose an easy river walk or a skyline view depending on energy and weather." },
+      { time: "17:00", title: "Sachsenhausen dinner", note: "Try green sauce and Apfelwein, then turn in early." },
+      { time: "Next day", title: "Train to Copenhagen", note: "If you stayed overnight, use your reserved Frankfurt–København H itinerary and protect every transfer. Exact trains depend on the ticket you select." },
     ],
   },
   {
@@ -263,9 +263,9 @@ export const ports: Port[] = [
 ];
 
 export const tripDays = [
-  { stage: "Tue · Sep 1", city: "Travel", title: "Fly RDU → London", detail: "AA174 overnight one day earlier; keep the first London day’s essentials in the carry-on." },
-  { stage: "Wed · Sep 2", city: "London · Richmond", title: "Ted Lasso day in Richmond", detail: "Drop bags at the Heathrow hotel, visit the Ted Lasso Store and Paved Court, then have lunch at The Prince’s Head." },
-  { stage: "Thu · Sep 3", city: "Copenhagen", title: "Arrive, check in, settle down", detail: "SK502 to Copenhagen; Adina check-in and a gentle first evening." },
+  { stage: "Tue · Sep 1", city: "Travel", title: "Fly Charlotte → Frankfurt", detail: "AA704 overnight from CLT to FRA; the car stays in Charlotte for the return drive." },
+  { stage: "Wed · Sep 2", city: "Frankfurt", title: "Frankfurt day or train onward", detail: "After AA704, either explore Frankfurt and stay overnight or take the long train to Copenhagen for an extra day there." },
+  { stage: "Thu · Sep 3", city: "Copenhagen", title: "Flexible arrival / full city day", detail: "If you stayed in Frankfurt, travel to København H today; otherwise enjoy the extra Copenhagen day and your all-days sightseeing ticket." },
   { stage: "Fri · Sep 4", city: "Copenhagen", title: "Castles, market, canal & Tivoli", detail: "Your full city day: Rosenborg, Torvehallerne, Nyhavn, and evening lights." },
   { stage: "Sat · Sep 5", city: "Copenhagen", title: "Carlsberg, embark & French dinner", detail: "Ship departs at 5:00 PM; confirmed French dinner aboard at 6:45 PM." },
   { stage: "Sun · Sep 6", city: "Oslo", title: "Vigeland to Aker Brygge", detail: "A long 10:00 AM–9:00 PM call with city sights and one museum." },
@@ -277,14 +277,14 @@ export const tripDays = [
   { stage: "Sat · Sep 12", city: "Stockholm", title: "Booked Stockholm transfer", detail: "Leave port at 9:00 AM and return eight hours later at about 5:00 PM." },
   { stage: "Sun · Sep 13", city: "Tallinn", title: "Toompea to Town Hall", detail: "Explore until early evening, then return for the 7:45 PM French dinner." },
   { stage: "Mon · Sep 14", city: "Helsinki", title: "Suomenlinna, design & sauna", detail: "Disembark, check in at Scandic Grand Central, and savor the finale." },
-  { stage: "Tue · Sep 15", city: "Travel", title: "Fly Helsinki → RDU", detail: "AY1331 to London, then AA173 home." },
+  { stage: "Tue · Sep 15", city: "Travel", title: "Fly Helsinki → Charlotte", detail: "AY1331 to London, AA173 to RDU, then AA1894 to CLT; collect the car and drive home." },
 ];
 
 export const packing = {
   "Documents & money": ["Passport", "Cruise documents", "Travel insurance details", "Current entry authorizations", "Primary + backup card", "A little euro cash", "Printed emergency contacts"],
   "Layers for fall": ["Puffer coats", "Waterproof shell", "Light fleece or sweater", "Compact umbrella", "Comfortable walking boots", "Backup walking shoes", "Light gloves", "Scarf or buff", "Warm socks"],
   "Port-day bag": ["Ship card + photo ID", "Power bank", "Refillable water bottle", "Daily medications", "Sunglasses", "Packable tote", "Small snack", "Paper copy of all-aboard time"],
-  "Tech & cabin": ["Socket adapters (EU + UK)", "Charging cables", "Kindle", "Tablet", "Luggage tracker", "Headphones", "Magnetic cabin hooks", "Seasickness remedy", "Dopp kit", "Offline copies of bookings"],
+  "Tech & cabin": ["Socket adapters (EU + UK for LHR connection)", "Charging cables", "Kindle", "Tablet", "Luggage tracker", "Headphones", "Magnetic cabin hooks", "Seasickness remedy", "Dopp kit", "Offline copies of bookings"],
 };
 
 export type Phrase = { country: string; flag: string; lang: string; phrase: string; sound: string; meaning: string };
