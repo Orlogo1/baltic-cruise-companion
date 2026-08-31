@@ -130,13 +130,13 @@ export default function Home() {
     window.addEventListener("online", updateConnection);
     window.addEventListener("offline", updateConnection);
     const refreshForNewVersion = () => {
-      if (!navigator.serviceWorker.controller || window.sessionStorage.getItem("baltic-sw-v19-refreshed")) return;
-      window.sessionStorage.setItem("baltic-sw-v19-refreshed", "true");
+      if (!navigator.serviceWorker.controller || window.sessionStorage.getItem("baltic-sw-v23-refreshed")) return;
+      window.sessionStorage.setItem("baltic-sw-v23-refreshed", "true");
       window.location.reload();
     };
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.addEventListener("controllerchange", refreshForNewVersion);
-      navigator.serviceWorker.register("/sw.js").then((registration) => registration.update()).catch(() => undefined);
+      navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`, { scope: import.meta.env.BASE_URL }).then((registration) => registration.update()).catch(() => undefined);
     }
     return () => {
       window.removeEventListener("online", updateConnection);
@@ -264,7 +264,7 @@ export default function Home() {
       const worker = registration.active;
       if (!worker) throw new Error("Offline worker unavailable");
       const resourceUrls = performance.getEntriesByType("resource").map((entry) => entry.name).filter((url) => url.startsWith(window.location.origin));
-      const urls = Array.from(new Set([window.location.origin + "/", ...resourceUrls, ...destinationPhotos.map((photo) => photo.image)]));
+      const urls = Array.from(new Set([new URL(import.meta.env.BASE_URL, window.location.origin).href, ...resourceUrls, ...destinationPhotos.map((photo) => photo.image)]));
       await new Promise<void>((resolve, reject) => {
         const channel = new MessageChannel();
         const timer = window.setTimeout(() => reject(new Error("Offline save timed out")), 30000);
