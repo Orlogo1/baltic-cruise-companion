@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { packing, phrases, ports, tripDays, type Phrase } from "./trip-data";
 
 const destinationPhotos = [
-  { city: "London · Richmond", caption: "Ted Lasso country around Richmond Green", credit: "Wikimedia Commons contributor", image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Richmond_Green,_London_(2).jpg?width=1600", source: "https://commons.wikimedia.org/wiki/File:Richmond_Green,_London_(2).jpg" },
+  { city: "Frankfurt", caption: "Römer, Paulskirche, and the modern skyline", credit: "Wikilidi", image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Frankfurt_(M.)_-_R%C3%B6mer,_Paulskirche,_Mainhattan.jpg?width=1600", source: "https://commons.wikimedia.org/wiki/File:Frankfurt_(M.)_-_R%C3%B6mer,_Paulskirche,_Mainhattan.jpg" },
   { city: "Copenhagen", caption: "Nyhavn’s colorful harbor", credit: "Mahendra", image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Nyhavn-2023.jpg?width=1600", source: "https://commons.wikimedia.org/wiki/File:Nyhavn-2023.jpg" },
   { city: "Oslo", caption: "The Opera House on the fjord", credit: "Helge Høifødt", image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Oslo_Opera_House_seen_from_Langkaia.JPG?width=1600", source: "https://commons.wikimedia.org/wiki/File:Oslo_Opera_House_seen_from_Langkaia.JPG" },
   { city: "Schwerin", caption: "A castle rising from the lake", credit: "Harald Hoyer", image: "https://commons.wikimedia.org/wiki/Special:Redirect/file/Schwerin_Castle_Aerial_View.jpg?width=1600", source: "https://commons.wikimedia.org/wiki/File:Schwerin_Castle_Aerial_View.jpg" },
@@ -15,24 +15,24 @@ const destinationPhotos = [
 ];
 
 const dayPortId: Record<string, string> = {
-  "London · Richmond": "london", Copenhagen: "copenhagen", Oslo: "oslo", Warnemünde: "warnemunde", Visby: "visby",
+  Frankfurt: "frankfurt", Copenhagen: "copenhagen", Oslo: "oslo", Warnemünde: "warnemunde", Visby: "visby",
   Riga: "riga", Tallinn: "tallinn", Stockholm: "stockholm", Gdańsk: "gdansk", Helsinki: "helsinki",
 };
 
-const portOrder = ["london", "copenhagen", "oslo", "warnemunde", "gdansk", "visby", "riga", "stockholm", "tallinn", "helsinki"];
+const portOrder = ["frankfurt", "copenhagen", "oslo", "warnemunde", "gdansk", "visby", "riga", "stockholm", "tallinn", "helsinki"];
 const orderedPorts = portOrder.map((id) => ports.find((port) => port.id === id)).filter((port): port is (typeof ports)[number] => Boolean(port));
 
 const flightTracker = [
-  { number: "AA174", date: "Sep 1", route: "RDU → LHR", airline: "American", statusUrl: "https://www.aa.com/travelInformation/flights/status?allFlightNumbers=174&flightNumber=174&sliceNumber=1", mapUrl: "https://www.flightaware.com/live/flight/AAL174" },
-  { number: "SK502", date: "Sep 3", route: "LHR → CPH", airline: "SAS", statusUrl: "https://www.flysas.com/us-en/flight-status", mapUrl: "https://www.flightaware.com/live/flight/SAS502" },
+  { number: "AA704", date: "Sep 1", route: "CLT → FRA", airline: "American", statusUrl: "https://www.aa.com/travelInformation/flights/status?allFlightNumbers=704&flightNumber=704&sliceNumber=1", mapUrl: "https://www.flightaware.com/live/flight/AAL704" },
   { number: "AY1331", date: "Sep 15", route: "HEL → LHR", airline: "Finnair", statusUrl: "https://www.finnair.com/en/flight-information", mapUrl: "https://www.flightaware.com/live/flight/FIN1331" },
   { number: "AA173", date: "Sep 15", route: "LHR → RDU", airline: "American", statusUrl: "https://www.aa.com/travelInformation/flights/status?allFlightNumbers=173&flightNumber=173&sliceNumber=1", mapUrl: "https://www.flightaware.com/live/flight/AAL173" },
+  { number: "AA1894", date: "Sep 15", route: "RDU → CLT", airline: "American", statusUrl: "https://www.aa.com/travelInformation/flights/status?allFlightNumbers=1894&flightNumber=1894&sliceNumber=1", mapUrl: "https://www.flightaware.com/live/flight/AAL1894" },
 ];
 
 type MapSpot = { label: string; x: number; y: number; kind?: "start" | "return" };
 const offlineMaps: Record<string, { note: string; spots: MapSpot[] }> = {
-  london: { note: "Richmond’s Ted Lasso locations cluster tightly around the Green; the riverside is a short downhill walk.", spots: [
-    { label: "Richmond station", x: 82, y: 75, kind: "start" }, { label: "Ted Lasso Store", x: 57, y: 49 }, { label: "Paved Court", x: 53, y: 42 }, { label: "Prince’s Head", x: 44, y: 34 }, { label: "Richmond Green", x: 31, y: 45 }, { label: "Riverside", x: 22, y: 80, kind: "return" },
+  frankfurt: { note: "The airport and long-distance station sit west of the city; Römerberg, the river, and Sachsenhausen form an easy central loop.", spots: [
+    { label: "FRA / Fernbahnhof", x: 12, y: 68, kind: "start" }, { label: "Hauptbahnhof", x: 34, y: 57 }, { label: "Römerberg", x: 59, y: 48 }, { label: "Cathedral", x: 70, y: 42 }, { label: "Eiserner Steg", x: 62, y: 62 }, { label: "Sachsenhausen", x: 72, y: 80, kind: "return" },
   ] },
   copenhagen: { note: "Adina and the cruise-side harbor sit northeast of the compact sightseeing core.", spots: [
     { label: "Adina / Østerport", x: 81, y: 20, kind: "start" }, { label: "Rosenborg", x: 52, y: 35 }, { label: "Torvehallerne", x: 36, y: 40 }, { label: "Nyhavn", x: 72, y: 57 }, { label: "Christiansborg", x: 49, y: 65 }, { label: "Tivoli", x: 31, y: 79, kind: "return" },
@@ -130,8 +130,8 @@ export default function Home() {
     window.addEventListener("online", updateConnection);
     window.addEventListener("offline", updateConnection);
     const refreshForNewVersion = () => {
-      if (!navigator.serviceWorker.controller || window.sessionStorage.getItem("baltic-sw-v18-refreshed")) return;
-      window.sessionStorage.setItem("baltic-sw-v18-refreshed", "true");
+      if (!navigator.serviceWorker.controller || window.sessionStorage.getItem("baltic-sw-v19-refreshed")) return;
+      window.sessionStorage.setItem("baltic-sw-v19-refreshed", "true");
       window.location.reload();
     };
     if ("serviceWorker" in navigator) {
@@ -331,6 +331,7 @@ export default function Home() {
           <div><span className="overline">Pocket mode</span><h3>{offlineSave === "ready" ? "Trip saved on this device" : "Keep the guide available without service"}</h3><p>Save the itinerary, port plans, packing list, phrases, currency notes, and destination photos. Live weather, maps, and external restaurant links still need a connection.</p></div>
           <div className="offline-actions">
             <button onClick={saveForOffline} disabled={offlineSave === "saving" || !online}>{offlineSave === "saving" ? "Saving…" : offlineSave === "ready" ? "Save again" : offlineSave === "error" ? "Try again online" : "Save for offline"}</button>
+            <a href="https://app.notion.com/p/2b59aa1f16c080e7843ee206da6b1daa" target="_blank" rel="noreferrer">Open Notion planner ↗</a>
           </div>
         </div>
         <article className="music-card" id="music">
@@ -351,13 +352,13 @@ export default function Home() {
           </div>
         </article>
         <div className="travel-grid">
-          <article className="travel-card flight-card"><span className="travel-date">Sep 1–3</span><span className="overline">Outbound</span><h3>RDU <i>→</i> LHR <i>→</i> CPH</h3><div className="flight-pills"><b>AA174</b><b>SK502</b></div><p>AA174 overnight one day early, a full Richmond day, then onward to Copenhagen.</p></article>
-          <article className="travel-card hotel-card"><span className="travel-date">Sep 2–3</span><span className="overline">London stay · Terminal 5</span><h3>Sofitel London Heathrow</h3><p>One Heathrow night with lounge access, directly connected to Terminal 5 by a covered walkway.</p><span className="confirmed">✓ Booked · lounge access</span></article>
-          <article className="travel-card hotel-card"><span className="travel-date">Sep 3–5</span><span className="overline">Copenhagen stay</span><h3>Adina Apartment Hotel</h3><p>Your pre-cruise base near the harbor and cruise-port side of town.</p><span className="confirmed">✓ Confirmed in planner</span></article>
+          <article className="travel-card flight-card"><span className="travel-date">Sep 1–2</span><span className="overline">Outbound</span><h3>CLT <i>→</i> FRA</h3><div className="flight-pills"><b>AA704</b></div><p>Overnight to Frankfurt, then continue to Copenhagen by train on September 2 or 3.</p></article>
+          <article className="travel-card hotel-card"><span className="travel-date">Sep 2–3</span><span className="overline">Flexible extra day</span><h3>Frankfurt or Copenhagen</h3><p>Stay one night in Frankfurt, or take the long train after arrival and use the extra day in Copenhagen.</p><span className="confirmed">Decision pending</span></article>
+          <article className="travel-card hotel-card"><span className="travel-date">Sep 2/3–5</span><span className="overline">Copenhagen stay</span><h3>Adina Apartment Hotel</h3><p>Your pre-cruise base near the harbor; arrival date depends on the Frankfurt decision.</p><span className="confirmed">✓ Hotel confirmed</span></article>
           <article className="travel-card cruise-card"><span className="travel-date">Sep 5–14</span><span className="overline">Baltic cruise</span><h3>Copenhagen <i>→</i> Helsinki</h3><p>Embark September 5; nine nights with one restorative sea day.</p><span className="confirmed">9 nights</span></article>
           <article className="travel-card cruise-tracker-card"><span className="travel-date">Live map</span><span className="overline">Cruise tracker</span><h3>Where is Norwegian Sun?</h3><p>Open CruiseMapper for the ship’s latest AIS position, route, speed, and current itinerary.</p><a href="https://www.cruisemapper.com/ships/Norwegian-Sun-735" target="_blank" rel="noreferrer" aria-label="Track Norwegian Sun live on CruiseMapper">Track the ship&nbsp; ↗</a><small><i className={online ? "live" : ""} /> {online ? "Live tracker available" : "Connect to view position"}</small></article>
           <article className="travel-card hotel-card"><span className="travel-date">Sep 14–15</span><span className="overline">Helsinki stay</span><h3>Scandic Grand Central</h3><p>Beside Central Station for an easy final night and airport train.</p><span className="confirmed">✓ Confirmed in planner</span></article>
-          <article className="travel-card flight-card"><span className="travel-date">Sep 15</span><span className="overline">Homebound</span><h3>HEL <i>→</i> LHR <i>→</i> RDU</h3><div className="flight-pills"><b>AY1331</b><b>AA173</b></div><p>Finnair to London, then American home to Raleigh–Durham.</p></article>
+          <article className="travel-card flight-card"><span className="travel-date">Sep 15</span><span className="overline">Homebound</span><h3>HEL <i>→</i> LHR <i>→</i> RDU <i>→</i> CLT</h3><div className="flight-pills"><b>AY1331</b><b>AA173</b><b>AA1894</b></div><p>Fly back to Charlotte, collect the car, and drive home.</p></article>
         </div>
         <div className="flight-dashboard" id="flights">
           <div className="flight-dashboard-head"><div><span className="overline">Live flight desk</span><strong>Your four flights, one place</strong></div><p>Routes and dates stay available offline. Airline status and live aircraft maps need an internet connection and become most useful within 48 hours of departure.</p></div>
@@ -369,10 +370,10 @@ export default function Home() {
         </div>
         <div className="rail-plans" aria-label="Airport train plans">
           <article>
-            <span className="rail-icon">LHR</span><div><span className="overline">Sep 2–3 · Sofitel Terminal 5</span><h3>Richmond outing · confirmed base</h3><p>Walk from Terminal 5 to the <b>Sofitel London Heathrow</b>, drop the bags, then use live TfL directions to <b>Richmond station</b>. From there, Paved Court, the Ted Lasso Store, The Prince’s Head, Richmond Green, and the riverside are all walkable. Return in time to enjoy the included hotel lounge before an early night.</p><small>Covered walkway from Terminal 5 · contactless payment works on TfL · confirm lounge hours and SK502’s departure terminal at check-in</small></div>
+            <span className="rail-icon">FRA</span><div><span className="overline">Sep 2 or 3 · Frankfurt to Copenhagen</span><h3>Long-distance train to København H</h3><p>Use <b>Frankfurt Flughafen Fernbahnhof</b> for the long-distance journey. Deutsche Bahn currently shows fastest trips around <b>9¼ hours</b> with at least one transfer; reserve seats and choose a connection with sensible transfer margins after you decide which city gets the extra day.</p><small>No direct train · exact services depend on the booked date · recheck the full itinerary in DB Navigator before departure</small></div>
           </article>
           <article>
-            <span className="rail-icon">CPH</span><div><span className="overline">Sep 3 · airport to hotel</span><h3>Direct regional train to Østerport</h3><p>After SK502’s scheduled 1:20 PM arrival, follow Train signs below Terminal 3. Take a northbound Øresund/regional train that lists <b>Østerport</b>, commonly toward Helsingør or Nivå. Ride about 25 minutes, then walk 10–15 minutes to Adina at Amerika Plads 7.</p><small>No fixed train number · services run frequently · buy the ticket before boarding</small></div>
+            <span className="rail-icon">CPH</span><div><span className="overline">Sep 2 or 3 · station to hotel</span><h3>København H to Adina</h3><p>After the Germany–Denmark train arrives at <b>København H</b>, take an S-train toward <b>Østerport</b>, then walk about 10–15 minutes to Adina at Amerika Plads 7. A taxi is the low-effort option after the long rail day.</p><small>Arrival day depends on the Frankfurt decision · keep the hotel informed if arriving late</small></div>
           </article>
           <article>
             <span className="rail-icon">HEL</span><div><span className="overline">Sep 15 · hotel to airport</span><h3>I or P train · airport target 6:00 AM</h3><p>AY1331 is currently scheduled for <b>8:00 AM</b>. Leave the hotel room around <b>5:00 AM</b>, walk directly into Helsinki Central, and take the first airport-bound <b>I or P train departing by 5:20 AM</b>. The ride is about 30 minutes, putting you at HEL around 5:50 AM—just over two hours early.</p><small>ABC ticket required · use whichever I/P train leaves first · confirm flight and early train times the day before</small></div>
